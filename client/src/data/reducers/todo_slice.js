@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit"
 
 const initialState = {
-    list: [];
+    list: [],
+    error: null
 }
 
 const todosList = createSlice({
@@ -9,11 +10,25 @@ const todosList = createSlice({
     initialState,
     reducers: {
         getTodosSuccess(state, action) {
-            state.list = action.payload.list;
+            state.list = action.payload.list
+        },
+        getTodosFailure(state, action) {
+            state.error = action.payload
         }
     }
 });
 
-export const { getTodosSuccess } = todosList.actions;
+export const { getTodosSuccess, getTodosFailure } = todosList.actions;
 
-export const todosList.reducer;
+export default todosList.reducer;
+
+
+export const getTodoList = () => async dispatch => {
+    try {
+        const res = await fetch('http://localhost:8000/');
+        const listData = await res.json();
+        dispatch(getTodosSuccess(listData));
+    } catch (err) {
+        dispatch(getTodosFailure(err.toString()));
+    }
+}
