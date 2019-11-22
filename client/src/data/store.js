@@ -1,6 +1,6 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { createStore } from 'redux';
 import { rootReducer } from './reducers';
 
-export const store = configureStore({
+export const store = createStore({
     reducer: rootReducer
 });
