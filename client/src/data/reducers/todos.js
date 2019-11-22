@@ -20,14 +20,14 @@ export function todos(state = initialState, action) {
       return [
         ...state.slice(0, action.payload.index),
         { ...state[action.payload.index], completed: true },
-        ...state.slice(index + 1);
+        ...state.slice(action.payload.index + 1),
       ];
     // Marks TODO as not completed.
     case MARK_TODO_NOT_COMPLETED:
         return [
           ...state.slice(0, action.payload.index),
           { ...state[action.payload.index], completed: false },
-          ...state.slice(index + 1);
+          ...state.slice(action.payload.index + 1),
         ];
     default:
       return state;
