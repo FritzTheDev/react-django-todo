@@ -8,7 +8,6 @@ import {
 const initialState = [];
 
 export function todos(state = initialState, action) {
-  console.log(state);
   console.log(action);
   switch (action.type) {
     // Adds TODO to end of array
