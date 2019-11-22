@@ -11,14 +11,16 @@ export const requestTodos = () => (dispatch) => {
         .catch(error => dispatch({ type: REQUEST_TODOS_FAILURE, payload: { error: error.toString() }}));
 }
 
-export const addTodo = () => (dispatch) => {
-    fetch(`${process.env.SERVER_ROOT_URL}/todos`, { method: 'POST' })
+export const addTodo = (title, body) => (dispatch) => {
+    fetch(`${process.env.SERVER_ROOT_URL}/todos`, { method: 'POST', body: { title, body } })
         .then(data => dispatch({ type: ADD_TODO_SUCCESS, payload: { todo: data } }))
         .catch(error => dispatch({ type: ADD_TODO_FAILURE, payload: { error: error.toString() } }));
 }
 
-export const toggleTodo = (id) => (dispatch) => {
-    fetch(`${process.env.SERVER_ROOT_URL}/todos/${id}`, { method: 'PATCH'})
+export const toggleTodo = (id) => (dispatch, getState) => {
+    const list = getState()['todos']['list'];
+    const todoIsCompleted = list.filter(val => val.id === id);
+    fetch(`${process.env.SERVER_ROOT_URL}/todos/${id}`, { method: 'PATCH'}, { completed: !todoIsCompleted })
         .then(data => dispatch({ type: TOGGLE_TODO_SUCCESS, payload: { todo: data } }))
         .catch(error => dispatch({ type: TOGGLE_TODO_FAILURE, payload: { error: error.toString() } }));
 }
