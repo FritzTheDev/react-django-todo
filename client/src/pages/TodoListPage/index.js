@@ -29,15 +29,3 @@ const mapDispatchToProps = dispatch => {
 }
 
 export const TodoListPage = connect(mapStateToProps, mapDispatchToProps)(BaseTodoListPage);
-
-// export const TodoListPage = connect(
-//     (state) => ({
-//         todos: state.todos
-//     }),
-//     (dispatch) => ({
-//         addTodo: (title, body) => dispatch(addTodo(title, body)),
-//         markTodoCompleted: (index) => dispatch(markTodoCompleted(index)),
-//         markTodoNotCompleted: (index) => dispatch(markTodoNotCompleted(index)),
-//         deleteTodo: (index) => dispatch(deleteTodo(index))
-//     })
-// )(BaseTodoListPage);
