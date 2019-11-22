@@ -1,14 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from "react-redux";
 
-import { addTodo, markTodoCompleted, markTodoNotCompleted, deleteTodo } from '../../data/actions/todo_actions';
+import { addTodo, requestTodos } from '../../data/actions/todo_actions';
 
-const BaseTodoListPage = (props) => {
-    console.log(props.todos);
+const BaseTodoListPage = ({ todos, dispatchAddTodo, dispatchRequestTodos }) => {
+    useEffect(() => {
+        dispatchRequestTodos()
+    }, [dispatchRequestTodos]);
+    const todosList = todos.list
     return (
         <>
-            <button onClick={() => props.dispatchAddTodo('test title', 'best body')}>Add Todo</button>
-            <button onClick={() => props.dispatchDeleteTodo(0)}>Remove First Todo</button>
+            <p>{todosList[0] && todosList[0].title}</p>
         </>
     );
 }
@@ -22,9 +24,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         dispatchAddTodo: (title, body) => dispatch(addTodo(title, body)),
-        dispatchMarkTodoCompleted: (index) => dispatch(markTodoCompleted(index)),
-        dispatchMarkTodoNotCompleted: (index) => dispatch(markTodoNotCompleted(index)),
-        dispatchDeleteTodo: (index) => dispatch(deleteTodo(index)),
+        dispatchRequestTodos: () => dispatch(requestTodos()),
     }
 }
 
