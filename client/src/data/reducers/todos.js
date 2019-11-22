@@ -2,7 +2,7 @@ import { ADD_TODO_SUCCESS, ADD_TODO_FAILURE, REQUEST_TODOS_SUCCESS, REQUEST_TODO
 
 const initialState = { list: [], error: null };
 
-export function todos = (state = initialState, action) => {
+export const todos = (state = initialState, action) => {
   switch(action.type) {
     case REQUEST_TODOS_SUCCESS:
       return { list: action.payload.todos, error: null }
@@ -20,5 +20,7 @@ export function todos = (state = initialState, action) => {
         ], error: null }
     case TOGGLE_TODO_FAILURE:
       return { list: state.list, error: action.payload.error }
+    default:
+      return state;
   }
 }
