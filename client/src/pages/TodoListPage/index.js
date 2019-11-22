@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from "react-redux";
 
-import { addTodo, markTodoCompleted, markTodoNotCompleted, deleteTodo } from '../data/actions/todo_actions';
+import { addTodo, markTodoCompleted, markTodoNotCompleted, deleteTodo } from '../../data/actions/todo_actions';
 
 const TodoListPage = (props) => {
     console.log(props);
