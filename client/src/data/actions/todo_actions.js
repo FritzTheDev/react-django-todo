@@ -17,7 +17,7 @@ export const addTodo = () => (dispatch) => {
         .catch(error => dispatch({ type: ADD_TODO_FAILURE, payload: { error: error.toString() } }));
 }
 
-export const toggleTodo = (id) => (dispatch, getState) => {
+export const toggleTodo = (id) => (dispatch) => {
     fetch(`${process.env.SERVER_ROOT_URL}/todos/${id}`, { method: 'PATCH'})
         .then(data => dispatch({ type: TOGGLE_TODO_SUCCESS, payload: { todo: data } }))
         .catch(error => dispatch({ type: TOGGLE_TODO_FAILURE, payload: { error: error.toString() } }));
