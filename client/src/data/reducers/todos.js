@@ -8,7 +8,7 @@ import { combineReducers } from "redux"
 
 const initialState = [];
 
-function todos(state = initialState, action) {
+export function todos(state = initialState, action) {
   switch (action.type) {
     // Adds TODO to end of array
     case ADD_TODO: 
@@ -23,7 +23,7 @@ function todos(state = initialState, action) {
         { ...state[action.payload.index], completed: true },
         ...state.slice(index + 1);
       ];
-    
+    // Marks TODO as not completed.
     case MARK_TODO_NOT_COMPLETED:
         return [
           ...state.slice(0, action.payload.index),
@@ -34,5 +34,3 @@ function todos(state = initialState, action) {
       return state;
   }
 }
-
-export const rootReducer = combineReducers({ todos });
