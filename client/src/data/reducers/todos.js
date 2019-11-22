@@ -8,10 +8,12 @@ import {
 const initialState = [];
 
 export function todos(state = initialState, action) {
+  console.log(state);
+  console.log(action);
   switch (action.type) {
     // Adds TODO to end of array
     case ADD_TODO: 
-      return [...state, { title: action.title, body: action.body, completed: false }];
+      return [...state, { title: action.payload.title, body: action.payload.body, completed: false }];
     // Deletes TODO from specified index.
     case DELETE_TODO: 
       return state.filter((val, index) => index !== action.payload.index);

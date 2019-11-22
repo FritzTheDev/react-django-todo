@@ -3,19 +3,23 @@ import { connect } from "react-redux";
 
 import { addTodo, markTodoCompleted, markTodoNotCompleted, deleteTodo } from '../../data/actions/todo_actions';
 
-export const TodoListPage = (props) => {
+const BaseTodoListPage = (props) => {
     console.log(props);
-    return (<div />);
+    console.log(props.todos);
+    return (<>
+        <button onClick={() => addTodo('test title', 'best body')}></button>
+        <h1>{props.todos[0] && props.todos[0].title}</h1>
+    </>);
 }
 
-connect(
+export const TodoListPage = connect(
     (state) => ({
         todos: state.todos
     }),
     (dispatch) => ({
-        addTodo: (title, body) => addTodo(title, body),
-        markTodoCompleted: (index) => markTodoCompleted(index),
-        markTodoNotCompleted: (index) => markTodoNotCompleted(index),
-        deleteTodo: (index) => deleteTodo(index)
+        addTodo: (title, body) => dispatch(addTodo(title, body)),
+        markTodoCompleted: (index) => dispatch(markTodoCompleted(index)),
+        markTodoNotCompleted: (index) => dispatch(markTodoNotCompleted(index)),
+        deleteTodo: (index) => dispatch(deleteTodo(index))
     })
-)(TodoListPage);
+)(BaseTodoListPage);
