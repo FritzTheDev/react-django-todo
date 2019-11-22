@@ -4,7 +4,7 @@ import {
   MARK_TODO_COMPLETED,
   MARK_TODO_NOT_COMPLETED
 } from "../actions/todo_actions";
-import { combineReducers } from "../../../../../../../Library/Caches/typescript/3.6/node_modules/redux";
+import { combineReducers } from "redux"
 
 const initialState = [];
 
