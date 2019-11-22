@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 
 import { addTodo, markTodoCompleted, markTodoNotCompleted, deleteTodo } from '../../data/actions/todo_actions';
 
-const TodoListPage = (props) => {
+export const TodoListPage = (props) => {
     console.log(props);
     return (<div />);
 }
