@@ -13,16 +13,10 @@ export const todos = (state = initialState, action) => {
     case ADD_TODO_FAILURE:
       return Object.assign({}, { list: state.todos, error: action.payload.error });
     case TOGGLE_TODO_SUCCESS:
-      if (action.payload.index === 0) {
-        return Object.assign({}, { list: [
-          ...state.list.slice(0, action.payload.index),
-          { ...action.payload.data },
-        ]});
-      }
       return Object.assign({}, { list: [
           ...state.list.slice(0, action.payload.index),
-          { ...action.payload.data },
-          ...state.list.slice(action.payload.index),
+          action.payload.data,
+          ...state.list.slice(action.payload.index + 1),
         ], error: null });
     case TOGGLE_TODO_FAILURE:
       return Object.assign({}, { list: state.list, error: action.payload.error });
