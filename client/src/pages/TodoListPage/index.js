@@ -6,7 +6,7 @@ import { TodoCard } from "./TodoCard";
 import { addTodo, requestTodos, toggleTodo } from '../../data/actions/todo_actions';
 
 const renderTodoList = (toggleTodo, todoList) => {
-    todoList.map(todo => (
+    return todoList.map(todo => (
       <Col xs="12" sm={{ span: 6}} md={{ span: 3, offset: 3 }}>
         <TodoCard toggleTodo={toggleTodo} todo={todo} />
       </Col>
@@ -17,11 +17,11 @@ const BaseTodoListPage = ({ todos, dispatchAddTodo, dispatchRequestTodos }) => {
     useEffect(() => {
         dispatchRequestTodos()
     }, [dispatchRequestTodos]);
-    const todoList = todos.list
+    console.log(todos.list)
     return (
-        <Container>
+        <Container fluid>
             <Row>
-              {renderTodoList(toggleTodo, todoList)}
+              {todos.list[0] && renderTodoList(toggleTodo, todos.list)}
             </Row>
         </Container>
     );
