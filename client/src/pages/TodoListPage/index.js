@@ -7,7 +7,7 @@ import { addTodo, requestTodos, toggleTodo } from '../../data/actions/todo_actio
 
 const renderTodoList = (toggleTodo, todoList) => {
     return todoList.map(todo => (
-      <Col key={todo.id} xs="12" sm={{ span: 6}} md={{ span: 3 }}>
+      <Col key={todo.id} xs="12" sm={{ span: 6 }} md={{ span: 4 }} className="my-2 my-md-3">
         <TodoCard toggleTodo={toggleTodo} todo={todo} />
       </Col>
     ))
