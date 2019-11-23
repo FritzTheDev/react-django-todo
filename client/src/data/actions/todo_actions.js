@@ -20,9 +20,23 @@ export const addTodo = (title, body) => (dispatch) => {
 
 export const toggleTodo = (id) => (dispatch, getState) => {
     const list = getState()['todos']['list'];
-    const todoIsCompleted = list.filter(val => val.id === id);
-    console.log(todoIsCompleted);
-    fetch(`http://localhost:8000/todos/${id}/`, { method: 'PATCH'}, { completed: !todoIsCompleted.id })
-        .then(data => dispatch({ type: TOGGLE_TODO_SUCCESS, payload: { todo: data } }))
-        .catch(error => dispatch({ type: TOGGLE_TODO_FAILURE, payload: { error: error.toString() } }));
+    let index;
+    let targetTodo;
+    list.forEach((todo, feIndex) => {
+        if (todo.id === id) {
+            targetTodo = todo;
+            index = feIndex;
+        }
+    });
+    console.log(index);
+
+    const finalObject = { ...targetTodo, completed: !targetTodo.completed }
+
+    const body = JSON.stringify(finalObject);
+    
+    fetch(`http://localhost:8000/todos/${id}/`, { method: 'PUT', body, headers: { 'Content-Type': 'application/json'} })
+        .then(res => {
+            res.json().then(data => {
+                dispatch({ type: TOGGLE_TODO_SUCCESS, payload: { data, index } })})
+                .catch(error => dispatch({ type: TOGGLE_TODO_FAILURE, payload: { error: error.toString() } }))});
 }
