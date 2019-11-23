@@ -3,7 +3,7 @@ import { Card, Button } from "react-bootstrap";
 
 export const TodoCard = ({ todo, toggleTodo }) => (
     <Card>
-        <Card.Header className="bg-primary text-white">
+        <Card.Header className={`${todo.completed ? "bg-success" : "bg-danger"} text-white`}>
             <Card.Title className="my-0 text-center">
                 {todo.title}
             </Card.Title>
@@ -13,10 +13,10 @@ export const TodoCard = ({ todo, toggleTodo }) => (
                 {todo.body}
             </Card.Text>
             {todo.completed &&
-                <Button block onClick={() => toggleTodo(todo.id)}>Mark Not Completed</Button>
+                <Button variant="secondary" block onClick={() => toggleTodo(todo.id)}>Mark Not Completed</Button>
             }
             {!todo.completed &&
-                <Button block onClick={() => toggleTodo(todo.id)}>Mark As Completed</Button>
+                <Button variant="outline-secondary" block onClick={() => toggleTodo(todo.id)}>Mark As Completed</Button>
             }
         </Card.Body>
     </Card>
