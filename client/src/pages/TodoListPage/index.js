@@ -13,7 +13,7 @@ const renderTodoList = (toggleTodo, todoList) => {
     ))
 }
 
-const BaseTodoListPage = ({ todos, dispatchAddTodo, dispatchRequestTodos }) => {
+const BaseTodoListPage = ({ todos, dispatchAddTodo, dispatchRequestTodos, dispatchToggleTodo }) => {
     useEffect(() => {
         dispatchRequestTodos()
     }, [dispatchRequestTodos]);
@@ -21,7 +21,7 @@ const BaseTodoListPage = ({ todos, dispatchAddTodo, dispatchRequestTodos }) => {
     return (
         <Container fluid>
             <Row>
-              {todos.list[0] && renderTodoList(toggleTodo, todos.list)}
+              {todos.list[0] && renderTodoList(dispatchToggleTodo, todos.list)}
             </Row>
         </Container>
     );
