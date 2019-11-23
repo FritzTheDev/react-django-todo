@@ -17,7 +17,7 @@ const BaseTodoListPage = ({ todos, dispatchAddTodo, dispatchRequestTodos, dispat
     useEffect(() => {
         dispatchRequestTodos()
     }, [dispatchRequestTodos]);
-    console.log(todos.list)
+    
     return (
         <Container fluid>
             <Row>
