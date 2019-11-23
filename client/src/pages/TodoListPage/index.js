@@ -1,20 +1,29 @@
 import React, { useEffect } from 'react';
 import { connect } from "react-redux";
-import { Container } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 
+import { TodoCard } from "./TodoCard";
 import { addTodo, requestTodos, toggleTodo } from '../../data/actions/todo_actions';
 
-const renderTodoList = (toggleTodo, )
+const renderTodoList = (toggleTodo, todoList) => {
+    todoList.map(todo => (
+      <Col xs="12" sm={{ span: 6}} md={{ span: 3, offset: 3 }}>
+        <TodoCard toggleTodo={toggleTodo} todo={todo} />
+      </Col>
+    ))
+}
 
 const BaseTodoListPage = ({ todos, dispatchAddTodo, dispatchRequestTodos }) => {
     useEffect(() => {
         dispatchRequestTodos()
     }, [dispatchRequestTodos]);
-    const todosList = todos.list
+    const todoList = todos.list
     return (
-        <>
-            <p>{todosList[0] && todosList[0].title}</p>
-        </>
+        <Container>
+            <Row>
+              {renderTodoList(toggleTodo, todoList)}
+            </Row>
+        </Container>
     );
 }
 
